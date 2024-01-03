@@ -3,13 +3,22 @@ pipeline{
             stages{
                 stage('Code'){
                     steps{
-                        git url: 'https://github.com/SantoshMorla/django-todo-cicd.git',branch: 'develop'
+                        git url: 'https://github.com/SantoshMorla/django-todo-cicd.git',branch: 'master'
                     }
                 }
                 
                 stage('Build and Test'){
                     steps {
-                        sh 'docker build . -t django-app-latest'
+                        sh 'docker build . -t devsantosh03/node-todo-app:latest'
+                    }
+                }
+                stage('Logging  and Push'){
+                    steps {
+                        withCredentials([usernamePassword(credentialsId:'dockerhub',passwordVariable:'dockerhubPassword',usernameVariable:'userName')]){
+                        sh "docker login -u $(env.userName) -p $(dockerhubPassword)"
+                        sh "docker push  devsantosh03/node-todo-app:latest"
+                                
+                        }
                     }
                 }
                 
