@@ -67,7 +67,8 @@ pipeline{
         }
         
         stage("Code Deploy"){
-            steps{    
+            steps{ 
+                echo "Docker swarn using"
                 sh "docker-compose down && docker-compose up -d"
             }
         }
