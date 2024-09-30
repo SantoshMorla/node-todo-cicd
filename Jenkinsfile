@@ -1,12 +1,11 @@
 pipeline{
-        agent {label 'Dev-Node'}
+        agent {label 'prod-agent'}
             stages{
                 stage('Code'){
                     steps{
                         git url: 'https://github.com/SantoshMorla/node-todo-cicd.git',branch: 'master'
                     }
                 }
-                
                 stage('Build and Test'){
                     steps {
                         sh 'docker build . -t devsantosh03/node-todo-app:latest'
@@ -17,17 +16,13 @@ pipeline{
                         withCredentials([usernamePassword(credentialsId:'dockerhub',passwordVariable:'dockerhubPassword',usernameVariable:'userName')]){
                         sh "docker login -u ${env.userName} -p ${env.dockerhubPassword}"
                         sh "docker push  devsantosh03/node-todo-app:latest"
-                                
                         }
                     }
                 }
-                
                 stage('Deploying'){
                     steps{
-                      sh 'docker-compose down && docker-compose up -d' 
+                        sh 'docker-compose down && docker-compose up -d' 
                     }
                 }
-                 
-    
             }    
         }
