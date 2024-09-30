@@ -21,7 +21,7 @@ pipeline{
                 }
                 stage('Deploying'){
                     steps{
-                        sh docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest
+                        sh 'docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest'
                         //sh 'docker-compose down && docker-compose up -d' 
                     }
                 }
