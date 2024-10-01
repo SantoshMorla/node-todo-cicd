@@ -27,3 +27,12 @@ pipeline{
                 }
             }    
         }
+post{
+        always{
+                sh 'echo pipeline completed'
+        }
+        success{
+                sh 'echo pipeline succeeded'
+        }
+        
+}
