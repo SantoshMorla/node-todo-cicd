@@ -18,7 +18,6 @@ pipeline{
                         sh "docker push  devsantosh03/node-todo-app:latest"
                         }
                     }
-                }
                 stage('Deploying'){
                     steps{
                         // sh 'docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest'
@@ -26,13 +25,16 @@ pipeline{
                     }
                 }
             }    
-        }
-post{
-        always{
-                sh 'echo pipeline completed'
-        }
-        success{
-                sh 'echo pipeline succeeded'
-        }
+        post{
+                always{
+                        sh 'echo pipeline completed'
+                }
+                success{
+                        sh 'echo pipeline succeeded'
+                }
+                failure{
+                        sh 'echo pipeline failed'
+                }
         
+        }
 }
