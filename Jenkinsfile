@@ -3,7 +3,7 @@ pipeline {
             stages{
                 stage('Code'){
                     steps {
-                        git url: 'https://github.com/SantoshMorla/node-todo-cicd.git',branch: 'master'
+                        git url: 'https://github.com/SantoshMorla/node-todo-cicd.git',
                     }
                 }
                 stage('Build and Test'){
@@ -26,11 +26,15 @@ pipeline {
                              echo 'This will run if the pipeline is successful.'
                        }
                         failure {
-                            echo 'This will run if the pipeline fails.'
+                          echo 'This will run if the pipeline fails.'
                                 }
                      }      
                 }
                 stage('Deploying'){
+                    when{
+                        branch: 'master'
+
+                    }
                     steps{
                         // sh 'docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest'
                         sh 'docker compose down && docker compose up -d' 
