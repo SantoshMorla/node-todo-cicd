@@ -32,7 +32,7 @@ pipeline {
                 }
                 stage('Deploying'){
                     when{
-                        branch: 'master'
+                        branch 'master'
 
                     }
                     steps{
