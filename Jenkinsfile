@@ -3,10 +3,13 @@ pipeline {
             stages{
                 stage('Code'){
                     steps {
-                        git url: 'https://github.com/SantoshMorla/node-todo-cicd.git'
+                        git url: 'https://github.com/SantoshMorla/node-todo-cicd.git',branch 'master'
                     }
                 }
                 stage('Build and Test'){
+                        when{
+                                environment name: 'env-prod', value: 'Tanew@2686' 
+                            }
                     steps {
                         sh 'docker build . -t devsantosh03/node-todo-app:latest'
                     }
@@ -31,10 +34,7 @@ pipeline {
                      }      
                 }
                 stage('Deploying'){
-                    when{
-                        branch 'master'
-
-                    }
+                   
                     steps{
                         // sh 'docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest'
                         sh 'docker compose down && docker compose up -d' 
