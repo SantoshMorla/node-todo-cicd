@@ -1,8 +1,8 @@
 pipeline{
-        agent {label 'prod-agent'}
+        agent any
             stages{
                 stage('Code'){
-                    steps{
+                    steps {
                         git url: 'https://github.com/SantoshMorla/node-todo-cicd.git',branch: 'master'
                     }
                 }
@@ -25,22 +25,21 @@ pipeline{
                     }
                 }
             }    
-               post {
-                always {
-                    echo 'This will always run, no matter what the result of the pipeline is.'
-                }
-                success {
-                    echo 'This will run if the pipeline is successful.'
-                }
-                failure {
-                    echo 'This will run if the pipeline fails.'
-                }
-                unstable {
-                    echo 'This will run if the pipeline is unstable.'
-                }
-                changed {
-                    echo 'This will run if the pipeline result changes compared to the previous run.'
-                }
-            }        
-        
+               // post {
+               //          always {
+               //              echo 'This will always run, no matter what the result of the pipeline is.'
+               //          }
+               //          success {
+               //              echo 'This will run if the pipeline is successful.'
+               //          }
+               //          failure {
+               //              echo 'This will run if the pipeline fails.'
+               //          }
+               //          unstable {
+               //              echo 'This will run if the pipeline is unstable.'
+               //          }
+               //          changed {
+               //              echo 'This will run if the pipeline result changes compared to the previous run.'
+               //          }
+               //  }        
 }
