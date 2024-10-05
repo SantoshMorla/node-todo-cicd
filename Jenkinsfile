@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
         agent any
             stages{
                 stage('Code'){
@@ -18,28 +18,31 @@ pipeline{
                         sh "docker push  devsantosh03/node-todo-app:latest"
                         }
                     }
+                }
                 stage('Deploying'){
                     steps{
                         // sh 'docker run -d -p 8000:8000 devsantosh03/node-todo-app:latest'
                         sh 'docker compose down && docker compose up -d' 
                     }
                 }
-            }    
-               // post {
-               //          always {
-               //              echo 'This will always run, no matter what the result of the pipeline is.'
-               //          }
-               //          success {
-               //              echo 'This will run if the pipeline is successful.'
-               //          }
-               //          failure {
-               //              echo 'This will run if the pipeline fails.'
-               //          }
-               //          unstable {
-               //              echo 'This will run if the pipeline is unstable.'
-               //          }
-               //          changed {
-               //              echo 'This will run if the pipeline result changes compared to the previous run.'
-               //          }
-               //  }        
+               
+                 post {
+                      always {
+                                  echo 'This will always run, no matter what the result of the pipeline is.'
+                              }
+                         success {
+                             echo 'This will run if the pipeline is successful.'
+                             }
+                        failure {
+                            echo 'This will run if the pipeline fails.'
+                        }
+                        unstable {
+                             echo 'This will run if the pipeline is unstable.'
+                        }
+                        changed {
+                             echo 'This will run if the pipeline result changes compared to the previous run.'
+                         }
+                     }        
+          
+             }
 }
