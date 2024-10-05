@@ -8,7 +8,7 @@ pipeline {
                 }
                 stage('Build and Test'){
                         when{
-                                environment name: 'env-prod', value: 'Tanew@2686' 
+                                environment name: 'env-prod', value: 'Tanew@' 
                             }
                     steps {
                         sh 'docker build . -t devsantosh03/node-todo-app:latest'
