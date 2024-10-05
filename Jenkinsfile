@@ -1,5 +1,5 @@
 pipeline {
-        agent any
+        agent {label: 'prod-agent'}
             stages{
                 stage('Code'){
                     steps {
@@ -25,24 +25,23 @@ pipeline {
                         sh 'docker compose down && docker compose up -d' 
                     }
                 }
-               
-                 post {
+                post{
                       always {
                                   echo 'This will always run, no matter what the result of the pipeline is.'
-                              }
+                        }
                          success {
                              echo 'This will run if the pipeline is successful.'
-                             }
+                       }
                         failure {
                             echo 'This will run if the pipeline fails.'
-                        }
+                                }
                         unstable {
                              echo 'This will run if the pipeline is unstable.'
                         }
                         changed {
                              echo 'This will run if the pipeline result changes compared to the previous run.'
                          }
-                     }        
+                 }        
           
              }
 }
